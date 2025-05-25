@@ -13,15 +13,13 @@ git clone https://github.com/your-username/docker-pipeline-demo.git
 cd docker-pipeline-demo
 
 ## Build the Docker image
-docker run -p 5000:5000 docker-pipeline-demo
+docker build -t docker-pipeline-demo .
 
-##
-Run the container
+## Run the container
 docker run -d -p 5000:5000 docker-pipeline-demo
 Explanation:
 -d: Runs the container in the background (detached).
 -p 5000:5000: Maps port 5000 of your host to port 5000 of the container.
-
 docker-pipeline-demo: Tag or name of the Docker image.
 
 ## Test it Locally
