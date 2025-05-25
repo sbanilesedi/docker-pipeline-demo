@@ -76,19 +76,3 @@ ingress:
         - path: /
           pathType: Prefix
 ```
-
----
-
-## 🧼 Cleanup
-
-To delete the release:
-
-```bash
-helm uninstall my-app
-```
-
----
-
-## 📄 License
-
-MIT
