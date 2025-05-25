@@ -51,14 +51,7 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v3
 
-      - name: Decode and configure KUBECONFIG
+      - name: Set up kubeconfig
         run: |
-          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 -d > $HOME/.kube/config
-
-      - name: Deploy using Helm
-        run: |
-          helm upgrade --install my-app ./helm/my-app \
-            --namespace default \
-            --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/docker-pipeline-demo \
-            --set image.tag=latest \
-            -f ./helm/my-app/values-dev.yaml
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG_B64 }}" | base64 -d > $HOME/.kube/config
