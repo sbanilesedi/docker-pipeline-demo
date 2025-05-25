@@ -19,8 +19,8 @@ docker build -t docker-pipeline-demo .
 docker run -d -p 5000:5000 docker-pipeline-demo
 
 
-Explanation:
--d: Runs the container in the background (detached).
+## Explanation:
+-d: Runs the container in the background.
 -p 5000:5000: Maps port 5000 of your host to port 5000 of the container.
 docker-pipeline-demo: Tag or name of the Docker image.
 
