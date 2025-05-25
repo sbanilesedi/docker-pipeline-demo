@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on: [push]
+
+env:
+  IMAGE_NAME: books-api
+  REGISTRY: ghcr.io/${{ github.repository_owner }}
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 app.py
+
+  docker-build:
+    needs: build-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t $REGISTRY/$IMAGE_NAME:latest .
+          docker push $REGISTRY/$IMAGE_NAME:latest
