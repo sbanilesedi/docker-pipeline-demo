@@ -60,19 +60,3 @@ helm upgrade --install my-app ./helm/my-app \
   --namespace default \
   -f ./helm/my-app/values-prod.yaml
 
-
-
-## Ingress
-
-Update `values.yaml`, `values-dev.yaml`, or `values-prod.yaml` to set hostnames:
-
-```yaml
-ingress:
-  enabled: true
-  className: nginx
-  hosts:
-    - host: myapp.local
-      paths:
-        - path: /
-          pathType: Prefix
-```
