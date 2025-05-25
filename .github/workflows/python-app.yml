@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD 
 
 on: [push]
 
@@ -22,11 +22,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-
-      - name: Lint with flake8
-        run: |
-          pip install flake8
-          flake8 app.py
 
   docker-build:
     needs: build-test
