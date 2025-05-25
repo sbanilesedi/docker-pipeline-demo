@@ -1,0 +1,7 @@
+config:
+  ENV: development
+  DEBUG: "true"
+
+ingress:
+  hosts:
+    - host: dev.myapp.com

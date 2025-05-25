@@ -1,0 +1,9 @@
+config:
+  ENV: production
+  DEBUG: "false"
+
+replicaCount: 3
+
+ingress:
+  hosts:
+    - host: myapp.com
