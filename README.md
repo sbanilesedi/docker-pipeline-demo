@@ -1,21 +1,94 @@
-# docker-pipeline-demo
+# CI/CD Demo App with Helm, Docker, and GitHub Actions
 
-## 🐳 Build and Run the FastAPI App with Docker
+This project demonstrates a CI/CD pipeline using:
 
-### 1. Build the Docker image
+- Python (3.11)
+- Docker
+- GitHub Actions
+- Helm
 
-docker build -t books-api .
 
-## Run the Docker container
-docker run -d -p 8080:8080 books-api
 
-## Optional: Override defaults using environment variables
+## Build Docker Image
+docker build -t your-dockerhub-username/docker-pipeline-demo:latest .
 
-docker run -p 8080:8080 \
-  -e PAGE_SIZE=5 \
-  -e LOG_LEVEL=DEBUG \
-  -e APP_ENV=dev \
-  books-api
+## Push Docker Image
+docker push your-dockerhub-username/docker-pipeline-demo:latest
 
-##
- Visit in your browser: http://localhost:8080/books
+
+## GitHub Actions CI/CD
+
+CI/CD pipeline is defined in `.github/workflows/ci-cd.yaml`.
+
+It includes:
+- Python test & build
+- Docker image build & push
+- Helm-based Kubernetes deployment
+
+
+
+## GitHub Secrets Required
+
+Set the following secrets in **Repository Settings > Secrets**:
+
+| Name               | Description                          |
+|--------------------|--------------------------------------|
+| `DOCKERHUB_USERNAME` | Your Docker Hub username            |
+| `DOCKERHUB_TOKEN`    | Docker Hub access token/password    |
+| `KUBECONFIG_DATA`    | Base64-encoded kubeconfig file      |
+
+Generate `KUBECONFIG_DATA`:
+
+cat ~/.kube/config | base64 -w 0
+
+
+
+## Deploy with Helm
+
+From the project root:
+
+helm upgrade --install my-app ./helm/my-app \
+  --namespace default \
+  --set image.repository=your-dockerhub-username/docker-pipeline-demo \
+  --set image.tag=latest \
+  -f ./helm/my-app/values-dev.yaml
+
+
+To deploy to prod:
+
+helm upgrade --install my-app ./helm/my-app \
+  --namespace default \
+  -f ./helm/my-app/values-prod.yaml
+
+
+
+## Ingress
+
+Update `values.yaml`, `values-dev.yaml`, or `values-prod.yaml` to set hostnames:
+
+```yaml
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: myapp.local
+      paths:
+        - path: /
+          pathType: Prefix
+```
+
+---
+
+## 🧼 Cleanup
+
+To delete the release:
+
+```bash
+helm uninstall my-app
+```
+
+---
+
+## 📄 License
+
+MIT
