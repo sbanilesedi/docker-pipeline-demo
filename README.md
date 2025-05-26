@@ -4,13 +4,13 @@ This repository demonstrates how to containerize a Python application using Dock
 This serves as the foundation for further CI/CD and Kubernetes deployments.
 
 
-Getting Started
+### Getting Started
 
-🔧 Prerequisites
+### 🔧 Prerequisites
 Docker installed and running
 
 
-Project Structure
+### Project Structure
 docker-pipeline-demo/
 ├── Dockerfile        # Instructions to build the Docker image
 ├── app/              # Python application source code
@@ -18,7 +18,7 @@ docker-pipeline-demo/
 │   └── requirements.txt # Python dependencies
 ├── README.md         # Project documentation
 
-🛠 Dockerfile Instructions 
+### 🛠 Dockerfile Instructions 
 Here is a sample Dockerfile for a Python-based web application:
 
 ### Use official Python base image
