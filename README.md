@@ -12,11 +12,11 @@ Docker installed and running
 
 ### Project Structure
 docker-pipeline-demo/
-├── Dockerfile        # Instructions to build the Docker image
-├── app/              # Python application source code
-│   ├── main.py       # Entry point for the app
-│   └── requirements.txt # Python dependencies
-├── README.md         # Project documentation
+- ├── Dockerfile        # Instructions to build the Docker image
+- ├── app/              # Python application source code
+- │   ├── main.py       # Entry point for the app
+- │   └── requirements.txt # Python dependencies
+- ├── README.md         # Project documentation
 
 ### 🛠 Dockerfile Instructions 
 Here is a sample Dockerfile for a Python-based web application:
