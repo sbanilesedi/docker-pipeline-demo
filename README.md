@@ -1,62 +1,72 @@
-# CI/CD Demo App with Helm, Docker, and GitHub Actions
+## docker-pipeline-demo
 
-This project demonstrates a CI/CD pipeline using:
-
-- Python (3.11)
-- Docker
-- GitHub Actions
-- Helm
+This repository demonstrates how to containerize a Python application using Docker. It includes a simple Dockerfile to build a Docker image and instructions to run the container locally. 
+This serves as the foundation for further CI/CD and Kubernetes deployments.
 
 
+Getting Started
 
-## Build Docker Image
-docker build -t your-dockerhub-username/docker-pipeline-demo:latest .
-
-## Push Docker Image
-docker push your-dockerhub-username/docker-pipeline-demo:latest
+🔧 Prerequisites
+Docker installed and running
 
 
-## GitHub Actions CI/CD
+Project Structure
+docker-pipeline-demo/
+├── Dockerfile        # Instructions to build the Docker image
+├── app/              # Python application source code
+│   ├── main.py       # Entry point for the app
+│   └── requirements.txt # Python dependencies
+├── README.md         # Project documentation
 
-CI/CD pipeline is defined in `.github/workflows/ci-cd.yaml`.
+🛠 Dockerfile Instructions 
+Here is a sample Dockerfile for a Python-based web application:
 
-It includes:
-- Python test & build
-- Docker image build & push
-- Helm-based Kubernetes deployment
+# Use official Python base image
+FROM python:3.10-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy dependencies
+COPY app/requirements.txt ./
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY app/ .
+
+# Expose the application port
+EXPOSE 8080
+
+# Run the application
+CMD ["python", "main.py"]
+
+Building and Running the Docker Container
+
+Clone the Repository
+git clone https://github.com/YOUR-USERNAME/docker-pipeline-demo.git
+cd docker-pipeline-demo
+
+ Build the Docker Image
+ docker build -t docker-pipeline-demo .
+This command builds the image using the Dockerfile in the repository root and tags it as docker-pipeline-demo.
+
+Run the Container
+docker run -d -p 8080:8080 docker-pipeline-demo
+This runs the container in detached mode, mapping port 8080 of your local machine to port 8080 inside the container.
+
+ Access the Application
+ http://localhost:8080
 
 
+ 🛠 Next Steps
 
-## GitHub Secrets Required
+This project can be extended with:
 
-Set the following secrets in **Repository Settings > Secrets**:
+GitHub Actions for CI/CD automation
 
-| Name               | Description                          |
-|--------------------|--------------------------------------|
-| `DOCKERHUB_USERNAME` | Your Docker Hub username            |
-| `DOCKERHUB_TOKEN`    | Docker Hub access token/password    |
-| `KUBECONFIG_DATA`    | Base64-encoded kubeconfig file      |
-
-Generate `KUBECONFIG_DATA`:
-
-cat ~/.kube/config | base64 -w 0
+Helm Charts for Kubernetes deployment
 
 
-
-## Deploy with Helm
-
-From the project root:
-
-helm upgrade --install my-app ./helm/my-app \
-  --namespace default \
-  --set image.repository=your-dockerhub-username/docker-pipeline-demo \
-  --set image.tag=latest \
-  -f ./helm/my-app/values-dev.yaml
-
-
-To deploy to prod:
-
-helm upgrade --install my-app ./helm/my-app \
-  --namespace default \
-  -f ./helm/my-app/values-prod.yaml
-
+ 
