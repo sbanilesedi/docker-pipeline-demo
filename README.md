@@ -24,7 +24,7 @@ Here is a sample Dockerfile for a Python-based web application:
 #### Use official Python base image
 FROM python:3.10-slim
 
-####Set working directory
+#### Set working directory
 WORKDIR /app
 
 #### Copy dependencies
