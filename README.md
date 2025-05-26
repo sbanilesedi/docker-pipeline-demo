@@ -42,7 +42,7 @@ EXPOSE 8080
 ### Run the application
 CMD ["python", "main.py"]
 
-# Building and Running the Docker Container
+### Building and Running the Docker Container
 
 ### Clone the Repository
 - git clone https://github.com/YOUR-USERNAME/docker-pipeline-demo.git
