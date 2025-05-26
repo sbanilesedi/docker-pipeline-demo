@@ -21,25 +21,25 @@ docker-pipeline-demo/
 🛠 Dockerfile Instructions 
 Here is a sample Dockerfile for a Python-based web application:
 
-# Use official Python base image
+### Use official Python base image
 FROM python:3.10-slim
 
-# Set working directory
+### Set working directory
 WORKDIR /app
 
-# Copy dependencies
+### Copy dependencies
 COPY app/requirements.txt ./
 
-# Install dependencies
+### Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+### Copy application code
 COPY app/ .
 
-# Expose the application port
+### Expose the application port
 EXPOSE 8080
 
-# Run the application
+### Run the application
 CMD ["python", "main.py"]
 
 Building and Running the Docker Container
