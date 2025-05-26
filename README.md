@@ -42,21 +42,21 @@ EXPOSE 8080
 ### Run the application
 CMD ["python", "main.py"]
 
-Building and Running the Docker Container
+# Building and Running the Docker Container
 
-Clone the Repository
-git clone https://github.com/YOUR-USERNAME/docker-pipeline-demo.git
-cd docker-pipeline-demo
+### Clone the Repository
+- git clone https://github.com/YOUR-USERNAME/docker-pipeline-demo.git
+- cd docker-pipeline-demo
 
- Build the Docker Image
- docker build -t docker-pipeline-demo .
-This command builds the image using the Dockerfile in the repository root and tags it as docker-pipeline-demo.
+ ### Build the Docker Image
+- docker build -t docker-pipeline-demo .
+- This command builds the image using the Dockerfile in the repository root and tags it as docker-pipeline-demo.
 
-Run the Container
-docker run -d -p 8080:8080 docker-pipeline-demo
-This runs the container in detached mode, mapping port 8080 of your local machine to port 8080 inside the container.
+### Run the Container
+- docker run -d -p 8080:8080 docker-pipeline-demo
+- This runs the container in detached mode, mapping port 8080 of your local machine to port 8080 inside the container.
 
- Access the Application
+###  Access the Application
  http://localhost:8080
 
 
